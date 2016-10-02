@@ -49,6 +49,67 @@
 (require-package 'scratch)
 (require-package 'mwe-log-commands)
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;;;;; set w3m for webbrowse  
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+(require 'w3m-load)  
+;;(require 'mime-w3m)  
+(require 'w3m)  
+(autoload 'w3m "w3m" "interface for w3m on emacs" t)  
+(autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)  
+;;(autoload 'w3m-search "w3m-search" "Search words using emacs-w3m." t)  
+
+(require 'w3m-search)
+(setq w3m-search-default-engine "php.net")
+(add-to-list 'w3m-search-engine-alist
+                     '("php.net" "http://php.net/zh/search.php?show=quickref&pattern=%s"))
+ ;; Make the previous search engine the default for the next
+ ;;     ;; search.
+ (defadvice w3m-search (after change-default activate)
+                  (let ((engine (nth 1 minibuffer-history)))
+                        (when (assoc engine w3m-search-engine-alist)
+                              (setq w3m-search-default-engine engine))))
+
+  
+  ;settings  
+  (setq w3m-use-cookies t)  
+  (setq w3m-home-page "http://php.net/")  
+    
+    ;; 默认显示图片  
+    (setq w3m-default-display-inline-image t)   
+    (setq w3m-default-toggle-inline-images t)  
+      
+      (setq w3m-use-form t)  
+      (setq w3m-tab-width 8)  
+      (setq w3m-use-cookies t)       ;;使用cookies  
+      (setq w3m-use-toolbar t)  
+      (setq w3m-use-mule-ucs t)  
+      ;(setq w3m-fill-column 120)  
+      (setq browse-url-browser-function 'w3m-browse-url)  
+      (setq w3m-view-this-url-new-session-in-background t)  
+        
+        ;; 使用w3m作为默认浏览器  
+        (setq browse-url-browser-function 'w3m-browse-url)                  
+        (setq w3m-view-this-url-new-session-in-background t)  
+          
+          ;;显示图标                                                        
+          (setq w3m-show-graphic-icons-in-header-line t)                    
+          (setq w3m-show-graphic-icons-in-mode-line t)   
+          (defun remove-w3m-output-garbages ()                              
+          ;"去掉w3m输出的垃圾."                                              
+          (interactive)                                                     
+          (let ((buffer-read-only))                                         
+          (setf (point) (point-min))                                        
+          (while (re-search-forward "[\200-\240]" nil t)                    
+          (replace-match " "))                                              
+          (set-buffer-multibyte t))                                         
+          (set-buffer-modified-p nil))  
+           
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+;;;;; lines above is I add in,  set w3m as webbrowse,  the php.net Chinese search engine is default search engine.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+
 (require 'init-frame-hooks)
 (require 'init-xterm)
 (require 'init-themes)
@@ -167,3 +228,9 @@
 ;; coding: utf-8
 ;; no-byte-compile: t
 ;; End:
+
+
+;;neotree: This extension try to simulat nerdtree(vim directory tree extension).
+(add-to-list 'load-path "/some/path/neotree")
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
