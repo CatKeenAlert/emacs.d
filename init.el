@@ -234,3 +234,29 @@
 (add-to-list 'load-path "/some/path/neotree")
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
+
+
+
+(add-to-list 'load-path "~/emacs/lisp/")
+(add-to-list 'load-path "~/emacs/lisp/geben")
+(require 'geben)
+(require 'dbgp)
+
+
+;; use apsell as ispell backend  
+(setq-default ispell-program-name "aspell")  
+;; ;; use American English as ispell default dictionary  
+(ispell-change-dictionary "american" t) 
+
+;;(setq html-mode-hook '(lambda()  
+;;                        (flyspell-mode t) 
+;;                        ))
+;;(setq php-mode-hook '(lambda()  
+;;                        (flyspell-mode t) 
+;;                        ))
+;;(setq js-mode-hook '(lambda()  
+;;                        (flyspell-mode t) 
+;;                        ))
+;;(setq js2-mode-hook '(lambda()  
+;;                        (flyspell-mode t) 
+;;                        ))
