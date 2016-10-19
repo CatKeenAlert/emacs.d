@@ -231,14 +231,14 @@
 
 
 ;;neotree: This extension try to simulat nerdtree(vim directory tree extension).
-(add-to-list 'load-path "/some/path/neotree")
+;;(add-to-list 'load-path "/some/path/neotree")
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
 
 
 
-(add-to-list 'load-path "~/emacs/lisp/")
-(add-to-list 'load-path "~/emacs/lisp/geben")
+;;(add-to-list 'load-path "~/.emacs.d/lisp/")
+;;(add-to-list 'load-path "~/.emacs.d/lisp/geben")
 (require 'geben)
 (require 'dbgp)
 
@@ -260,3 +260,12 @@
 ;;(setq js2-mode-hook '(lambda()  
 ;;                        (flyspell-mode t) 
 ;;                        ))
+
+(require 'chm-view)
+;;set default chm view delay time to a bigger number, waiting for rchmage load chm file over. if load completely, also get the error: “Cannot retrieve URL: http://localhost:531560 (exit status: 0)”, refresh again, it will works well.
+(setq-default chm-view-delay  59)  
+
+
+;;auto use evil
+(require 'evil) 
+(evil-mode 1) 
