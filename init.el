@@ -61,9 +61,11 @@
 ;;(autoload 'w3m-search "w3m-search" "Search words using emacs-w3m." t)  
 
 (require 'w3m-search)
-(setq w3m-search-default-engine "php.net")
+(setq w3m-search-default-engine "cn.yahoo.com ")
 (add-to-list 'w3m-search-engine-alist
-                     '("php.net" "http://php.net/zh/search.php?show=quickref&pattern=%s"))
+             '("cn.yahoo.com " "https://sg.search.yahoo.com/search?p=%s")
+             ;;'("php.net" "http://php.net/zh/search.php?show=quickref&pattern=%s")
+             )
  ;; Make the previous search engine the default for the next
  ;;     ;; search.
  (defadvice w3m-search (after change-default activate)
@@ -74,7 +76,7 @@
   
   ;settings  
   (setq w3m-use-cookies t)  
-  (setq w3m-home-page "http://php.net/")  
+  (setq w3m-home-page "http://192.168.0.6/href-direr/direr/entrysin.direr.php?p=/var/www/share.com/download.share.com/.")  
     
     ;; 默认显示图片  
     (setq w3m-default-display-inline-image t)   
@@ -243,29 +245,37 @@
 (require 'dbgp)
 
 
-;; use apsell as ispell backend  
-(setq-default ispell-program-name "aspell")  
-;; ;; use American English as ispell default dictionary  
-(ispell-change-dictionary "american" t) 
+;; use apsell as ispell backend
+(setq-default ispell-program-name "aspell")
+;; ;; use American English as ispell default dictionary
+(ispell-change-dictionary "american" t)
 
-;;(setq html-mode-hook '(lambda()  
-;;                        (flyspell-mode t) 
+;;(setq html-mode-hook '(lambda()
+;;                        (flyspell-mode t)
 ;;                        ))
-;;(setq php-mode-hook '(lambda()  
-;;                        (flyspell-mode t) 
-;;                        ))
-;;(setq js-mode-hook '(lambda()  
-;;                        (flyspell-mode t) 
-;;                        ))
-;;(setq js2-mode-hook '(lambda()  
-;;                        (flyspell-mode t) 
-;;                        ))
+
 
 (require 'chm-view)
 ;;set default chm view delay time to a bigger number, waiting for rchmage load chm file over. if load completely, also get the error: “Cannot retrieve URL: http://localhost:531560 (exit status: 0)”, refresh again, it will works well.
-(setq-default chm-view-delay  59)  
+(setq-default chm-view-delay  75)
 
 
 ;;auto use evil
-(require 'evil) 
-(evil-mode 1) 
+(require 'evil)
+(evil-mode 1)
+;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;set the web usefull paths for PHPScripts.;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq $webhome "/var/www/share.com/download.share.com"
+      $webdownloads "/var/www/share.com/download.share.com/downloads"
+      $phptools "/var/www/share.com/download.share.com/phptools")
+(message "%s %s %s" $webhome $webdownloads $phptools)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defalias 'webhome '/var/www/share.com/download.share.com)
+
+(setq default-directory "/home/catkeenalert/projects/share.com/download.share.com/")
+
+
