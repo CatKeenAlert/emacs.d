@@ -278,4 +278,36 @@
 
 (setq default-directory "/home/catkeenalert/projects/share.com/download.share.com/")
 
+(defun w3m-buffer-file-name ()
+  "load this  http://192.168.0.6/href-direr/direr/entrysin.direr.php?p= ... 后边拼接当前的 buffer-file-name, all in this window,
+the window of current editing buffer will hiden,
+you must set-buffer again,
+if you need to contine to edit the hidden buffer."
+  (interactive)
+  (w3m-goto-url (concat "http://192.168.0.6/href-direr/direr/entrysin.direr.php?p=" (buffer-file-name))))
+(global-set-key (kbd "M-2") 'w3m-buffer-file-name)
+
+(save-buffer)
+(defun w3m-this-web-file-in-last-window ()
+  "save-buffer, then view web effect of this file.
+detail: save-buffer,
+and concat buffer-file-name to file-system-web-explorer-url-prefix,
+and view output of this file in last window,
+without hiding window of current editting buffer,
+or moveing current editing cusor."
+  (interactive)
+  (let
+      (origin-wind (selected-window)
+                   (editing-buffer (current-buffer)))
+    (save-excursion
+      ;;(select-window foo)
+      (other-window -1)
+      (set-buffer editing-buffer)
+      (w3m-buffer-file-name)
+      ;;(select-window origin-wind)
+      (other-window 1))))
+(global-set-key (kbd "M-3") 'w3m-this-web-file-in-last-window)
+
+
+;;;
 
